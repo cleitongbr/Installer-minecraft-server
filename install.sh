@@ -132,6 +132,25 @@ if command -v ufw &> /dev/null; then
         ufw allow 25565
     fi
 fi
+# Mensagem final
 msg finalizado
-sleep 3
+sleep 1
+
+# Perguntar se quer iniciar o servidor agora
+case $MSG_LANG in
+    pt) read -p "Deseja iniciar o servidor agora? (sim/nao): " iniciar ;;
+    en) read -p "Do you want to start the server now? (yes/no): " iniciar ;;
+    es) read -p "¿Deseas iniciar el servidor ahora? (sí/no): " iniciar ;;
+esac
+
+if [[ "$iniciar" =~ ^(sim|yes|sí)$ ]]; then
+    sleep 2
+    ./start.sh
+else
+    case $MSG_LANG in
+        pt) echo "Você pode iniciar depois com: ./start.sh" ;;
+        en) echo "You can start it later with: ./start.sh" ;;
+        es) echo "Puedes iniciarlo luego con: ./start.sh" ;;
+    esac
+fi
 ./start.sh
