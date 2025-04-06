@@ -39,8 +39,11 @@ Script de instalação automática do servidor **PaperMC 1.21.4**, desenvolvido 
 ### 1. Dê permissão de execução:
 ```bash
 chmod +x install.sh
-
+```
 ### 2. Rode o instalador:
-'''bash
+```bash
 ./install.sh
+```
+E PRONTO!
+
 
