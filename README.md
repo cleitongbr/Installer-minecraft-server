@@ -1,50 +1,49 @@
-# Instalador Automático - PaperMC 🧱
+# Automatic Installer - PaperMC 🧱
 
-Script de instalação automática do servidor **PaperMC 1.21.4**, desenvolvido para **Ubuntu Server** com suporte multilíngue (Português, Inglês e Espanhol).
-
----
-
-## 🌍 Idiomas Suportados
-
-- 🇧🇷 Português
-- 🇺🇸 English
-- 🇪🇸 Español
+Automatic installation script for **PaperMC 1.21.4**, designed for **Ubuntu Server** with multilingual support (Portuguese, English, and Spanish).
 
 ---
 
-## ⚙️ Requisitos
+## 🌍 Supported Languages
 
-- Ubuntu Server (recomendado)
-- Acesso à internet
-- `curl`, `tar` e `ufw` instalados
-- Pelo menos **2GB de RAM** disponível
-
----
-
-## 🚀 O que o script faz:
-
-✔️ Cria a pasta do servidor `Paper`  
-✔️ Baixa e configura o **Java 21**  
-✔️ Baixa a versão **PaperMC 1.21.4 (Build 222)**  
-✔️ Detecta a quantidade de memória RAM e configura automaticamente  
-✔️ Pergunta se o servidor será **para contas oficiais ou piratas**  
-✔️ Cria os arquivos `start.sh`, `eula.txt` e `server.properties`  
-✔️ Libera a porta **25565** no firewall (se possível) 
-✔️ Sem erros!
+- 🇧🇷 Portuguese  
+- 🇺🇸 English  
+- 🇪🇸 Spanish  
 
 ---
 
-## 💡 Como usar
+## ⚙️ Requirements
 
-### 1. Dê permissão de execução:
+- Ubuntu Server (recommended)  
+- Internet access  
+- `curl`, `tar`, and `ufw` installed  
+- At least **2GB of RAM** available  
+
+---
+
+## 🚀 What the Script Does
+
+✔️ Creates the `Paper` server folder  
+✔️ Downloads and configures **Java 21**  
+✔️ Downloads **PaperMC 1.21.4 (Build 222)**  
+✔️ Detects available RAM and configures automatically  
+✔️ Asks if the server will be **online (premium) or cracked**  
+✔️ Creates `start.sh`, `eula.txt`, and `server.properties`  
+✔️ Opens port **25565** in the firewall (if possible)  
+✔️ No errors!
+
+---
+
+## 💡 How to Use
+
+### 1. Give execution permission:
 ```bash
 chmod +x install.sh
 ```
-### 2. Rode o instalador:
+### 2. Run the installer:
 ```bash
 ./install.sh
 ```
-
 ---
 
-e Pronto!! 
+🎉 Done! Your server is ready to go!
