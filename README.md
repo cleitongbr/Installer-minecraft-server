@@ -29,8 +29,8 @@ Script de instalação automática do servidor **PaperMC 1.21.4**, desenvolvido 
 ✔️ Detecta a quantidade de memória RAM e configura automaticamente  
 ✔️ Pergunta se o servidor será **para contas oficiais ou piratas**  
 ✔️ Cria os arquivos `start.sh`, `eula.txt` e `server.properties`  
-✔️ Libera a porta **25565** no firewall (se possível)  
-✔️ Tudo com **estilo colorido e animado no terminal!**
+✔️ Libera a porta **25565** no firewall (se possível) 
+✔️ Sem erros!
 
 ---
 
@@ -44,6 +44,7 @@ chmod +x install.sh
 ```bash
 ./install.sh
 ```
-E PRONTO!
 
+---
 
+e Pronto!! 
