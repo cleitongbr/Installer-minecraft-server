@@ -1,6 +1,4 @@
 #!/bin/bash
-
-# Cores RGB (simuladas com bash)
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -11,7 +9,6 @@ NC='\033[0m' # Reset
 
 clear
 
-# Animação RGB do título
 echo -e "${BLUE}╔═══════════════════════════════════════════════╗${NC}"
 sleep 0.1
 echo -e "${BLUE}║       ${YELLOW}Automatic Installer - PaperMC      ${BLUE}║${NC}"
@@ -21,7 +18,6 @@ sleep 0.1
 echo -e "${BLUE}╚═══════════════════════════════════════════════╝${NC}"
 sleep 1
 
-# Menu de idioma
 echo -e "\n${YELLOW}Select your language:${NC}"
 echo -e " ${GREEN}1${NC} - Português"
 echo -e " ${GREEN}2${NC} - English"
@@ -37,7 +33,6 @@ case $idioma in
   *) echo -e "${RED}Invalid option. Exiting...${NC}"; exit 1 ;;
 esac
 
-# Mensagens multilíngue
 msg() {
     case $MSG_LANG in
         pt)
@@ -79,7 +74,6 @@ msg() {
     esac
 }
 
-# Checar se já existe instalação
 if [ -d "Paper" ] && [ -f "Paper/paper.jar" ]; then
     case $MSG_LANG in
         pt)
@@ -105,10 +99,8 @@ if [ -d "Paper" ] && [ -f "Paper/paper.jar" ]; then
     fi
 fi
 
-# Criar pasta
 msg criando_pasta
 mkdir -p Paper && cd Paper || exit
-# Checar se já existe instalação
 if [ -d "Paper" ] && [ -f "Paper/paper.jar" ]; then
     case $MSG_LANG in
         pt)
@@ -134,36 +126,28 @@ if [ -d "Paper" ] && [ -f "Paper/paper.jar" ]; then
     fi
 fi
 
-# Criar pasta
 msg criando_pasta
 mkdir -p Paper && cd Paper || exit
 
-# Criar pasta
 msg criando_pasta
 mkdir -p Paper && cd Paper || exit
 
-# Baixar Java 21
 msg baixando_java
 curl -# -o jdk-21_linux-x64_bin.tar.gz https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz
 
-# Extrair e renomear
 msg extraindo_java
 tar -xzf jdk-21_linux-x64_bin.tar.gz
 rm jdk-21_linux-x64_bin.tar.gz
 mv jdk-* java21
 
-# Setar Java
 export JAVA_HOME=$(pwd)/java21
 export PATH=$JAVA_HOME/bin:$PATH
 
-# Baixar Paper
 msg baixando_paper
 curl -# -o paper.jar https://api.papermc.io/v2/projects/paper/versions/1.21.4/builds/222/downloads/paper-1.21.4-222.jar
 
-# Aceitar EULA
 echo "eula=true" > eula.txt
 
-# Detectar RAM
 TOTAL_RAM=$(free -g | awk '/^Mem:/{print $2}')
 if [ "$TOTAL_RAM" -ge 4 ]; then
     RAM_ALLOC=3
@@ -175,7 +159,6 @@ else
     RAM_ALLOC=1
 fi
 
-# Perguntar modo online
 msg pergunta_modo
 if [[ "$modo_online" == "yes" ]]; then
     ONLINE_MODE="true"
@@ -183,7 +166,6 @@ else
     ONLINE_MODE="false"
 fi
 
-# Criar server.properties
 cat <<EOF > server.properties
 online-mode=$ONLINE_MODE
 motd=Github.com/cleitongbr
