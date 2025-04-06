@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# Cores RGB (simuladas com bash)
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -6,15 +8,20 @@ BLUE='\033[0;34m'
 MAGENTA='\033[0;35m'
 CYAN='\033[0;36m'
 NC='\033[0m' # Reset
+
 clear
+
+# Animação RGB do título
 echo -e "${BLUE}╔═══════════════════════════════════════════════╗${NC}"
 sleep 0.1
 echo -e "${BLUE}║       ${YELLOW}Automatic Installer - PaperMC      ${BLUE}║${NC}"
 sleep 0.1
 echo -e "${BLUE}║     ${MAGENTA}by cleitongbr and ChatGPT <3       ${BLUE}║${NC}"
 sleep 0.1
-echo -e "${BLUE}╚═════════════════════════════════════v1════════╝${NC}"
+echo -e "${BLUE}╚═══════════════════════════════════════════════╝${NC}"
 sleep 1
+
+# Menu de idioma
 echo -e "\n${YELLOW}Select your language:${NC}"
 echo -e " ${GREEN}1${NC} - Português"
 echo -e " ${GREEN}2${NC} - English"
@@ -30,6 +37,7 @@ case $idioma in
   *) echo -e "${RED}Invalid option. Exiting...${NC}"; exit 1 ;;
 esac
 
+# Mensagens multilíngue
 msg() {
     case $MSG_LANG in
         pt)
@@ -71,25 +79,91 @@ msg() {
     esac
 }
 
+# Checar se já existe instalação
+if [ -d "Paper" ] && [ -f "Paper/paper.jar" ]; then
+    case $MSG_LANG in
+        pt)
+            echo -e "${YELLOW}Uma instalação existente foi encontrada.${NC}"
+            read -p "Deseja reinstalar do zero? (sim/nao): " reinstalar
+            ;;
+        en)
+            echo -e "${YELLOW}An existing installation was found.${NC}"
+            read -p "Do you want to reinstall from scratch? (yes/no): " reinstalar
+            ;;
+        es)
+            echo -e "${YELLOW}Se encontró una instalación existente.${NC}"
+            read -p "¿Deseas reinstalar desde cero? (sí/no): " reinstalar
+            ;;
+    esac
+
+    if [[ "$reinstalar" =~ ^(nao|no)$ ]]; then
+        echo -e "${CYAN}Cancelado. Saindo...${NC}"
+        exit 0
+    else
+        echo -e "${RED}Reinstalando...${NC}"
+        rm -rf Paper
+    fi
+fi
+
+# Criar pasta
+msg criando_pasta
+mkdir -p Paper && cd Paper || exit
+# Checar se já existe instalação
+if [ -d "Paper" ] && [ -f "Paper/paper.jar" ]; then
+    case $MSG_LANG in
+        pt)
+            echo -e "${YELLOW}Uma instalação existente foi encontrada.${NC}"
+            read -p "Deseja reinstalar do zero? (sim/nao): " reinstalar
+            ;;
+        en)
+            echo -e "${YELLOW}An existing installation was found.${NC}"
+            read -p "Do you want to reinstall from scratch? (yes/no): " reinstalar
+            ;;
+        es)
+            echo -e "${YELLOW}Se encontró una instalación existente.${NC}"
+            read -p "¿Deseas reinstalar desde cero? (sí/no): " reinstalar
+            ;;
+    esac
+
+    if [[ "$reinstalar" =~ ^(nao|no)$ ]]; then
+        echo -e "${CYAN}Cancelado. Saindo...${NC}"
+        exit 0
+    else
+        echo -e "${RED}Reinstalando...${NC}"
+        rm -rf Paper
+    fi
+fi
+
+# Criar pasta
 msg criando_pasta
 mkdir -p Paper && cd Paper || exit
 
+# Criar pasta
+msg criando_pasta
+mkdir -p Paper && cd Paper || exit
+
+# Baixar Java 21
 msg baixando_java
 curl -# -o jdk-21_linux-x64_bin.tar.gz https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz
 
+# Extrair e renomear
 msg extraindo_java
 tar -xzf jdk-21_linux-x64_bin.tar.gz
 rm jdk-21_linux-x64_bin.tar.gz
 mv jdk-* java21
 
+# Setar Java
 export JAVA_HOME=$(pwd)/java21
 export PATH=$JAVA_HOME/bin:$PATH
 
+# Baixar Paper
 msg baixando_paper
 curl -# -o paper.jar https://api.papermc.io/v2/projects/paper/versions/1.21.4/builds/222/downloads/paper-1.21.4-222.jar
 
+# Aceitar EULA
 echo "eula=true" > eula.txt
 
+# Detectar RAM
 TOTAL_RAM=$(free -g | awk '/^Mem:/{print $2}')
 if [ "$TOTAL_RAM" -ge 4 ]; then
     RAM_ALLOC=3
@@ -124,6 +198,7 @@ EOF
 
 chmod +x start.sh
 
+# Liberar firewall se possível
 msg firewall
 if command -v ufw &> /dev/null; then
     if [[ $EUID -ne 0 ]]; then
@@ -132,11 +207,10 @@ if command -v ufw &> /dev/null; then
         ufw allow 25565
     fi
 fi
-# Mensagem final
+
 msg finalizado
 sleep 1
 
-# Perguntar se quer iniciar o servidor agora
 case $MSG_LANG in
     pt) read -p "Deseja iniciar o servidor agora? (sim/nao): " iniciar ;;
     en) read -p "Do you want to start the server now? (yes/no): " iniciar ;;
