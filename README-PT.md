@@ -1,4 +1,4 @@
-# Instalador Automático - PaperMC 🧱
+# Instalador Automático - PaperMC 🧱 (v0.0.1)
 
 Script de instalação automática do servidor **PaperMC 1.21.4**, desenvolvido para **Ubuntu Server** com suporte multilíngue (Português, Inglês e Espanhol).
 
