@@ -47,3 +47,6 @@ chmod +x install.sh
 ---
 
 🎉 Done! Your server is ready to go!
+
+### ⚠️ termux is coming soon... (v0.0.2) pre
+ADDED PAPERMC (1.21 ~ 1.21.5) AND JAVA21 IS WORKS ONLY ANDROID
